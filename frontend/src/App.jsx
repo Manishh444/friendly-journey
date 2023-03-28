@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Button, ButtonGroup } from "@chakra-ui/react";
 import './App.css'
 
 function App() {
@@ -6,9 +7,9 @@ function App() {
 
   return (
     <div className="App">
-      <button>Subscribe</button>
+      <Button colorScheme="blue">Button</Button>
     </div>
-  )
+  );
 }
 
 export default App
