@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import HomePage from './components/HomePage';
+import HomePage from './components/Pages/HomePage';
 import { Button, ButtonGroup } from "@chakra-ui/react";
-// import './App.css'
+import './App.css'
 import { Route, Routes } from 'react-router-dom';
-import ChatPage from './components/ChatPage';
+import ChatPage from './components/Pages/ChatPage';
 
 function App() {
   const [count, setCount] = useState(0)
