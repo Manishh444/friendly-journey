@@ -10,7 +10,7 @@ const connectDB = async()=>{
         console.log(`MongoDB connected successfully: ${conn.connection.host}`);
     }
     catch(err){
-        console.log(`Error : ${err.message}`);
+        console.log(`Error = galti se mistake : ${err.message}`);
         process.exit();
     }
 }

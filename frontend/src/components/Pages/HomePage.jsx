@@ -14,14 +14,14 @@ import Signup from "../Auth/Signup";
 
 const HomePage = () => {
   return (
-    <Container maxW={"xl"} centerContent>
+    <Container maxW={"sm"} centerContent>
       <Box
         display={"flex"}
         justifyContent="center"
         p={3}
         bg="white"
         w={"100%"}
-        m="40px 0 15px 0"
+        m="10px 0 15px 0"
         borderRadius={"lg"}
         borderWidth="1.5px"
         borderColor="red"
@@ -32,7 +32,7 @@ const HomePage = () => {
       </Box>
       <Box
         bg={"white"}
-        p={4}
+        p={2}
         w="100%"
         borderRadius={"lg"}
         borderWidth="1.5px"
