@@ -90,7 +90,7 @@ const Signup = () => {
         },
       };
       const { data } = await axios.post(
-        "/api/user",
+        "http://localhost:8000/api/user",
         {
           name,
           email,
