@@ -9,6 +9,7 @@ dotenv.config();
 // connectDB is function to connect to mongoDB
 connectDB();
 const app = express();
+//use cors middleware in case proxy does not work, along with absolute path of server"
 // app.use(cors());
 
 //express.json() method convert incoming data to json format
