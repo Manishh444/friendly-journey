@@ -13,7 +13,7 @@ const registerUser = asyncHandler(async (req, res) => {
   if (userExists) {
     res.status(400);
     throw new Error("User already exists");
-  }
+  } 
   const user = await User.create({
     name,
     email,
@@ -53,5 +53,18 @@ const authUser = asyncHandler( async(req,res)=>{
       throw new Error("Invalid email or password");
     }
 })
+const allUsers = asyncHandler(async (req, res) => {
+  const keyword = req.query.search
+    ? {
+        $or: [
+          { name: { $regex: req.query.search, $options: "i" } },
+          { email: { $regex: req.query.search, $options: "i" } },
+        ],
+      }
+    : {};
 
-module.exports = {registerUser, authUser};
+  const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
+  res.send(users);
+});
+
+module.exports = {registerUser, authUser, allUsers};
