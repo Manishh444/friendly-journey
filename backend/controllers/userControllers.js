@@ -39,7 +39,8 @@ const registerUser = asyncHandler(async (req, res) => {
 const authUser = asyncHandler( async(req,res)=>{
     const {email, password} = req.body;
 
-    const user = await User.findOne({email});
+  const user = await User.findOne({ email });
+  // console.log('line 43 userController',user.__proto__)
     if (user && (await user.matchPassword(password))) {
       res.json({
         _id: user._id,
@@ -51,20 +52,41 @@ const authUser = asyncHandler( async(req,res)=>{
     } else {
       res.status(401);
       throw new Error("Invalid email or password");
-    }
+    } 
 })
+// const allUsers = asyncHandler(async (req, res) => {
+//   const keyword = req.query.search
+//     ? {
+//         $or: [
+//           { name: { $regex: req.query.search, $options: "i" } },
+//           { email: { $regex: req.query.search, $options: "i" } },
+//         ],
+//       }
+//     : {};
+
+//   const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
+//   res.send(users);
+// });
+
 const allUsers = asyncHandler(async (req, res) => {
-  const keyword = req.query.search
+  const searchQuery = req.query.search;
+  const query = searchQuery
     ? {
-        $or: [
-          { name: { $regex: req.query.search, $options: "i" } },
-          { email: { $regex: req.query.search, $options: "i" } },
+        $and: [
+          {
+            $or: [
+              { name: { $regex: searchQuery, $options: "i" } },
+              { email: { $regex: searchQuery, $options: "i" } },
+            ],
+          },
+          { _id: { $ne: req.user._id } },
         ],
       }
-    : {};
+    : { _id: { $ne: req.user._id } };
 
-  const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
+  const users = await User.find(query);
   res.send(users);
 });
+
 
 module.exports = {registerUser, authUser, allUsers};

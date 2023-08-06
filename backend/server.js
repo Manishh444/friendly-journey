@@ -14,6 +14,7 @@ const app = express();
 // app.use(cors());
 
 //express.json() method convert incoming data to json format
+//data collected from user will be available in req.body that need to be converted in json to 
 app.use(express.json());
 
 app.use('/api/user',userRoutes)

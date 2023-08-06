@@ -8,7 +8,7 @@ const accessChat= asyncHandler(async(req,res)=>{
         console.log("userId param not sent with request")
         return res.sendStatus(400);
     }
-
+// this is case 1: for checking existing chat
     var isChat = await Chat.find({
       isGroupChat: false,
       $and: [
@@ -16,9 +16,10 @@ const accessChat= asyncHandler(async(req,res)=>{
         { users: { $elemMatch: { $eq: userId } } },
       ],
     })
-      .populate("users", "-password")
+      .populate("users", "-password","")
       .populate("latestMessage");
-    console.log("line 21 chatController",req.user);
+    // console.log("line 21 chatController",isChat);
+  //case 2: create new chat
       isChat = await User.populate(isChat, {
         path: "latestMessage.sender",
         select: "name pic email",
